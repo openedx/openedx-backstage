@@ -64,6 +64,8 @@ techdocs:
 
 auth:
   # see https://backstage.io/docs/auth/ to learn about auth providers
+  # The oauth settings for development expect localhost for referrer and
+  # callbacks
   environment: development
   providers:
     github:
