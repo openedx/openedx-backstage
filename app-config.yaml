@@ -1,9 +1,9 @@
 app:
-  title: Scaffolded Backstage App
+  title: Open edX Backstage
   baseUrl: http://localhost:3000
 
 organization:
-  name: My Company
+  name: Open edX Project
 
 backend:
   # Used for enabling authentication, secret is shared by all backend plugins
