@@ -1,7 +1,6 @@
 app:
   title: Open edX Backstage
-  baseUrl: 'https://open-edx-backstage.herokuapp.com'
-  #baseUrl: http://localhost:3000
+  baseUrl: 'https://backstage.openedx.org'
 
 organization:
   name: Open edX Project
@@ -13,10 +12,8 @@ backend:
   # auth:
   #   keys:
   #     - secret: ${BACKEND_SECRET}
-  #baseUrl: http://localhost:7007
-  baseUrl: 'https://open-edx-backstage.herokuapp.com'
+  baseUrl: 'https://backstage.openedx.org'
   listen:
-    #port: 7007
     port: '$env: PORT'
     # Uncomment the following host directive to bind to all IPv4 interfaces and
     # not just the baseUrl hostname.
