@@ -1,6 +1,6 @@
 app:
   title: Open edX Backstage
-  baseUrl: 'https://backstage.openedx.org'
+  baseUrl: http://localhost:3000
 
 organization:
   name: Open edX Project
@@ -12,9 +12,10 @@ backend:
   # auth:
   #   keys:
   #     - secret: ${BACKEND_SECRET}
-  baseUrl: 'https://backstage.openedx.org'
+  baseUrl: http://localhost:7007
+
   listen:
-    port: '$env: PORT'
+    port: 7007
     # Uncomment the following host directive to bind to all IPv4 interfaces and
     # not just the baseUrl hostname.
     # host: 0.0.0.0
