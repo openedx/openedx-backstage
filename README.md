@@ -33,7 +33,7 @@ managed either via the console or via the CLI.
 This assumes you have the heroku CLI installed and have sucessfully
 authenticated.
 
-``` sh
+```sh
 yarn install
 yarn tsc
 yarn build
@@ -41,8 +41,9 @@ docker image build . -f packages/backend/Dockerfile --tag registry.heroku.com/op
 docker push registry.heroku.com/open-edx-backstage/web
 heroku container:release web -a open-edx-backstage
 ```
+
 In case of any issues you can see the logs like so.
 
-``` sh
+```sh
 heroku logs --tail
 ```

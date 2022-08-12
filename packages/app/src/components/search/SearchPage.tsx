@@ -8,9 +8,7 @@ import {
 } from '@backstage/plugin-catalog-react';
 import { TechDocsSearchResultListItem } from '@backstage/plugin-techdocs';
 
-import {
-  SearchType,
-} from '@backstage/plugin-search';
+import { SearchType } from '@backstage/plugin-search';
 import {
   SearchBar,
   SearchFilter,
