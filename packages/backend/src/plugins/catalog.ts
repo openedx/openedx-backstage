@@ -2,10 +2,11 @@ import { CatalogBuilder } from '@backstage/plugin-catalog-backend';
 import { ScaffolderEntitiesProcessor } from '@backstage/plugin-scaffolder-backend';
 import { Router } from 'express';
 import { PluginEnvironment } from '../types';
-import { GitHubOrgEntityProvider,
-         GithubDiscoveryProcessor,
-         GithubOrgReaderProcessor,
-       } from '@backstage/plugin-catalog-backend-module-github';
+import {
+  GitHubOrgEntityProvider,
+  GithubDiscoveryProcessor,
+  GithubOrgReaderProcessor,
+} from '@backstage/plugin-catalog-backend-module-github';
 
 // GitHub Discovery: https://backstage.io/docs/integrations/github/discovery
 // import {
@@ -14,7 +15,7 @@ import { GitHubOrgEntityProvider,
 // } from '@backstage/plugin-catalog-backend-module-github';
 import {
   ScmIntegrations,
-  DefaultGithubCredentialsProvider
+  DefaultGithubCredentialsProvider,
 } from '@backstage/integration';
 
 export default async function createPlugin(

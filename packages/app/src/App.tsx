@@ -48,14 +48,10 @@ const githubProvider: SignInProviderConfig = {
 const app = createApp({
   apis,
   components: {
-  SignInPage: props => (
-    <SignInPage
-      {...props}
-      auto
-      provider={githubProvider}
-    />
+    SignInPage: props => (
+      <SignInPage {...props} auto provider={githubProvider} />
     ),
-  },  
+  },
   bindRoutes({ bind }) {
     bind(catalogPlugin.externalRoutes, {
       createComponent: scaffolderPlugin.routes.root,
