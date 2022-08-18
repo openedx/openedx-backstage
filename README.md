@@ -47,3 +47,23 @@ In case of any issues you can see the logs like so.
 ```sh
 heroku logs --tail
 ```
+
+Note that the following environment variables are set on Heroku via the application console. They can be viewed and edited from the settings tab or from the CLI.
+
+AUTH_GITHUB_CLIENT_ID
+AUTH_GITHUB_CLIENT_SECRET
+GITHUB_TOKEN
+PGSSLMODE
+POSTGRES_DATABASE
+POSTGRES_HOST
+POSTGRES_PASSWORD
+POSTGRES_PORT
+POSTGRES_USER
+
+The GitHub client id and secret are used to enable GitHub authentication.
+
+The GitHub token is used for API calls.
+
+If secrets and tokens expire, they will need to be regenerated in GitHub and updated in Heroku. Configuration changes will automatically cause the application to be released to take the updates. **The GitHub token is a personal token.**
+
+PGSSLMODE is set to no-verify currently.  Another option would be to import the AWS certificate chain into Heroku.
