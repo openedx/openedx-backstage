@@ -10,11 +10,6 @@ import {
 } from '@backstage/plugin-catalog-backend-module-github';
 /* END ADDITION */
 
-import {
-  ScmIntegrations,
-  DefaultGithubCredentialsProvider,
-} from '@backstage/integration';
-
 export default async function createPlugin(
   env: PluginEnvironment,
 ): Promise<Router> {
