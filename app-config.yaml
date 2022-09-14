@@ -75,20 +75,24 @@ scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
 
 catalog:
-  import:
-    entityFilename: catalog-info.yaml
-    pullRequestBranchName: backstage-integration
-  rules:
-    - allow: [Component, System, API, Resource, Location]
-  locations:
-    - type: github-org
-      target: https://github.com/openedx
-      rules:
-        - allow: [User, Group]
+  # Docs here:https://backstage.io/docs/integrations/github/discovery
+  # Requires
+  # yarn add --cwd packages/backend @backstage/plugin-catalog-backend-module-github
+  providers:
+    github:
+      mainBranches:
+        organization: 'openedx'
+        filters:
+          branch: 'main'
+      masterBranches:
+        organization: 'openedx'
+        filters:
+          branch: 'master'
+      extraCatalogs:
+        organization: 'openedx'
+        catalogPath: 'catalog-extra/**/catalog-info.yaml'
+        filters:
+          branch: 'main'
+          repository: 'openedx-backstage'
 
-    # Docs here:https://backstage.io/docs/integrations/github/discovery
-    # Requires
-    # yarn add --cwd packages/backend @backstage/integration
-    # yarn add --cwd packages/backend @backstage/plugin-catalog-backend-module-github
-    - type: github-discovery
-      target: https://github.com/openedx
+
