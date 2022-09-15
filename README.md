@@ -38,6 +38,8 @@ yarn install
 yarn tsc
 yarn build
 docker image build . -f packages/backend/Dockerfile --tag registry.heroku.com/open-edx-backstage/web
+heroku login
+heroku container:login
 docker push registry.heroku.com/open-edx-backstage/web
 heroku container:release web -a open-edx-backstage
 ```
