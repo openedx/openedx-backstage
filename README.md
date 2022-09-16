@@ -47,5 +47,5 @@ heroku container:release web -a open-edx-backstage
 In case of any issues you can see the logs like so.
 
 ```sh
-heroku logs --tail
+heroku logs --tail -a open-edx-backstage
 ```
