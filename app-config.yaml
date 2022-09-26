@@ -40,9 +40,16 @@ backend:
 integrations:
   github:
     - host: github.com
-      # This is a Personal Access Token or PAT from GitHub. You can find out how to generate this token, and more information
-      # about setting up the GitHub integration here: https://backstage.io/docs/getting-started/configuration#setting-up-a-github-integration
-      token: ${GITHUB_TOKEN}
+      # Backstage docs for how to generate these: https://backstage.io/docs/integrations/github/github-apps
+      # We also have more specific docs in `docs/source/how-tos/create-github-credentials.rst`
+      apps:
+        - appId: ${AUTH_GITHUB_APP_ID}
+          clientId: ${AUTH_GITHUB_CLIENT_ID}
+          clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+          privateKey: ${AUTH_GITHUB_PRIVATE_KEY}
+          # Webhooks are disabled because we don't make use of them but backstage still needs a non-empty string.
+          # If we ever start using this, we should pull this value from an environment variable like the others.
+          webhookSecret: not-a-secret
 
 proxy:
   '/test':

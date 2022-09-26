@@ -9,54 +9,20 @@ To start the app, run:
 - Get Node 16: `nvm install 16`
     - This is not necessary if you already have Node 16 installed.
 - Install Yarn: `npm install --global yarn`
+- Ask a maintainer for access to the dev/prod credentials.
+    - If you need to create/re-create the creds there's a how-to in the docs repo.
 
-### Setup Github Tokens
 
-You'll need both a github personal access token and a github app to fully run
-this version of backstage.  By the end of this section, you should have the following
-three environment variables set in your shell:
-
-- `GITHUB_TOKEN`
-- `AUTH_GITHUB_CLIENT_SECRET`
-- `AUTH_GITHUB_CLIENT_ID`
-
-#### Personal Token
-
-You will need a new GitHub Personal Access Token with the following permissions:
-- `repo`
-- `user:email`
-- `read:org`
-- `read:discussion`
-
-See https://backstage.io/docs/integrations/github/locations for why you need each of those.
-
-1. Go to: https://github.com/settings/tokens
-2. Create a new token with those scopes.
-3. Save this token for use when you're developing.
-
-#### GitHub App
-
-1. Go to https://github.com/settings/apps
-2. Create your own github app with the following settings:
-
-    - Name: "\<your github handle\> Backstage Local"
-    - Homepage URL: "http://localhost:3000"
-    - Callback URL: "http://localhost:7007/api/auth/github"
-    - Disable Webhook
-
-3. Create the App
-
-4. Then from the created app, `Generate a new client secret`
-
-5. Save the client ID and client secret for use when you're developing.
 ## Everytime You Develop
 
 1. Export the various auth settings you need to run backstage locally.
     ```
-    export AUTH_GITHUB_CLIENT_SECRET=<new secret>
+    export AUTH_GITHUB_CLIENT_APP_ID=...
     export AUTH_GITHUB_CLIENT_ID=Iv1....
-    export GITHUB_TOKEN=ghp_...
+    export AUTH_GITHUB_CLIENT_SECRET=<new secret>
+    export AUTH_GITHUB_CLIENT_PRIVATE_KEY=...
     ```
+
 2. Start up the dev server
     ```sh
     yarn install
