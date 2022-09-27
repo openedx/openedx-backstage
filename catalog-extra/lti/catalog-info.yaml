@@ -7,9 +7,16 @@ metadata:
     intended to be broader and more abstract than the xblock-lti-consumer, and
     is intended to capture the overall way we think about LTI as a platform
     level service (including things like strategy, certification, etc.)
-
-    The ownership for this is a stub value.
+  links:
+    - url: https://openedx.atlassian.net/wiki/spaces/AC/pages/1154155694/What+is+LTI
+      title: What is LTI?
+    - url: https://openedx.atlassian.net/wiki/spaces/AC/pages/3541336118/LTI+for+Humans
+      title: LTI for Humans
+    - url: https://github.com/orgs/openedx/projects/4/views/12
+      title: LTI related items in the Open edX Roadmap
+    - url: https://openedx.atlassian.net/wiki/spaces/~6193b016d5986c006a6460ab/pages/3452600321/How+to+run+the+LTI+Validation+Test
+      title: How to run the LTI Validation Test (for Certification)
 spec:
   type: other
-  owner: user:ormsbee
+  owner: masters-devs-cosmonauts
   lifecycle: production
