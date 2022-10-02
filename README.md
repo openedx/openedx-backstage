@@ -48,15 +48,15 @@ authenticated.
 yarn install
 yarn tsc
 yarn build
-docker image build . -f packages/backend/Dockerfile --tag registry.heroku.com/open-edx-backstage/web
+docker image build . -f packages/backend/Dockerfile --tag registry.heroku.com/openedx-backstage/web
 heroku login
 heroku container:login
-docker push registry.heroku.com/open-edx-backstage/web
-heroku container:release web -a open-edx-backstage
+docker push registry.heroku.com/openedx-backstage/web
+heroku container:release web -a openedx-backstage
 ```
 
 In case of any issues you can see the logs like so.
 
 ```sh
-heroku logs --tail -a open-edx-backstage
+heroku logs --tail -a openedx-backstage
 ```
