@@ -6,7 +6,6 @@ import {
   catalogApiRef,
   CATALOG_FILTER_EXISTS,
 } from '@backstage/plugin-catalog-react';
-import { TechDocsSearchResultListItem } from '@backstage/plugin-techdocs';
 
 import { SearchType } from '@backstage/plugin-search';
 import {
@@ -19,7 +18,6 @@ import { useSearch } from '@backstage/plugin-search-react';
 import {
   CatalogIcon,
   Content,
-  DocsIcon,
   Header,
   Page,
 } from '@backstage/core-components';
@@ -64,11 +62,6 @@ const SearchPage = () => {
                   value: 'software-catalog',
                   name: 'Software Catalog',
                   icon: <CatalogIcon />,
-                },
-                {
-                  value: 'techdocs',
-                  name: 'Documentation',
-                  icon: <DocsIcon />,
                 },
               ]}
             />
@@ -117,14 +110,6 @@ const SearchPage = () => {
                       case 'software-catalog':
                         return (
                           <CatalogSearchResultListItem
-                            key={document.location}
-                            result={document}
-                            highlight={highlight}
-                          />
-                        );
-                      case 'techdocs':
-                        return (
-                          <TechDocsSearchResultListItem
                             key={document.location}
                             result={document}
                             highlight={highlight}
