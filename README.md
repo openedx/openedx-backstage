@@ -47,7 +47,7 @@ authenticated.
 ```sh
 yarn install
 yarn tsc
-yarn build
+yarn build:backend
 docker image build . -f packages/backend/Dockerfile --tag registry.heroku.com/openedx-backstage/web --pull
 heroku login
 heroku container:login
