@@ -6,8 +6,8 @@ To start the app, run:
 
 ## One-time Setup
 - Install nvm : https://github.com/nvm-sh/nvm#installing-and-updating
-- Get Node 16: `nvm install 16`
-    - This is not necessary if you already have Node 16 installed.
+- Get Node 18: `nvm install 18`
+    - This is not necessary if you already have Node 18 installed.
 - Install Yarn: `npm install --global yarn`
 - Ask a maintainer for access to the dev/prod credentials.
     - If you need to create/re-create the creds there's a how-to in the docs repo.
