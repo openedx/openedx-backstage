@@ -267,13 +267,6 @@
     },
     {
       "quadrant": "2",
-      "description": "An Open edX-written Python library for making brower automation tests using the Selenium framework easier to write and more reliable. Now primarily used for end-to-end tests, which are starting to migrate to Blip: cypress instead.",
-      "id": "Bok Choy",
-      "key": "Bok Choy",
-      "title": "Bok Choy"
-    },
-    {
-      "quadrant": "2",
       "description": "<a href=\"https://github.com/openedx/edx-celeryutils\">celery-utils</a> is an Open edX Python module hosted in Github which contains common code across multiple Celery tasks used in Open edX to provide common features such as logging, error recovery, and Django management commands which perform common tasks such as re-running failed tasks and deleting old tasks.",
       "id": "celery-utils",
       "key": "celery-utils",
