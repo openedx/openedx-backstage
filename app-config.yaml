@@ -78,6 +78,9 @@ auth:
       development:
         clientId: ${AUTH_GITHUB_CLIENT_ID}
         clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+    # See https://backstage.io/docs/auth/guest/provider
+    # guest: {}
+    guest: null
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
@@ -102,5 +105,3 @@ catalog:
         filters:
           branch: 'main'
           repository: 'openedx-backstage'
-
-
