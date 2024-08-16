@@ -105,3 +105,12 @@ catalog:
         filters:
           branch: 'main'
           repository: 'openedx-backstage'
+    githubOrg:
+      id: ghUsers
+      githubUrl: https://github.com
+      orgs:
+        - openedx
+      schedule:
+        initialDelay: { seconds: 30 }
+        frequency: { hours: 1 }
+        timeout: { minutes: 50 }
