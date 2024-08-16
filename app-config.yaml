@@ -95,16 +95,31 @@ catalog:
         organization: 'openedx'
         filters:
           branch: 'main'
+        schedule: # same options as in TaskScheduleDefinition
+          # supports cron, ISO duration, "human duration" as used in code
+          frequency: { minutes: 120 }
+          # supports ISO duration, "human duration" as used in code
+          timeout: { minutes: 3 }
       masterBranches:
         organization: 'openedx'
         filters:
           branch: 'master'
+        schedule: # same options as in TaskScheduleDefinition
+          # supports cron, ISO duration, "human duration" as used in code
+          frequency: { minutes: 120 }
+          # supports ISO duration, "human duration" as used in code
+          timeout: { minutes: 3 }
       extraCatalogs:
         organization: 'openedx'
         catalogPath: 'catalog-extra/**/catalog-info.yaml'
         filters:
           branch: 'main'
           repository: 'openedx-backstage'
+        schedule: # same options as in TaskScheduleDefinition
+          # supports cron, ISO duration, "human duration" as used in code
+          frequency: { minutes: 120 }
+          # supports ISO duration, "human duration" as used in code
+          timeout: { minutes: 3 }
     githubOrg:
       id: ghUsers
       githubUrl: https://github.com
