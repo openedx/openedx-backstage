@@ -38,7 +38,7 @@ import { SignInProviderConfig } from '@backstage/core-components';
 const githubProvider: SignInProviderConfig = {
   id: 'github-auth-provider',
   title: 'GitHub',
-  message: 'Sign in using GitHub',
+  message: 'You must be a member of the "openedx" github org.',
   apiRef: githubAuthApiRef,
 };
 // End changes for GitHub Auth
@@ -46,7 +46,7 @@ const app = createApp({
   apis,
   components: {
     SignInPage: props => (
-      <SignInPage {...props} auto providers={[githubProvider, 'guest']} />
+      <SignInPage {...props} auto providers={[githubProvider]} />
     ),
   },
   bindRoutes({ bind }) {
