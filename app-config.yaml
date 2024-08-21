@@ -78,6 +78,12 @@ auth:
       development:
         clientId: ${AUTH_GITHUB_CLIENT_ID}
         clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+        signIn:
+          resolvers:
+            - resolver: usernameMatchingUserEntityName
+    # See https://backstage.io/docs/auth/guest/provider
+    # guest: {}
+    guest: null
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
@@ -92,15 +98,37 @@ catalog:
         organization: 'openedx'
         filters:
           branch: 'main'
+        schedule: # same options as in TaskScheduleDefinition
+          # supports cron, ISO duration, "human duration" as used in code
+          frequency: { minutes: 120 }
+          # supports ISO duration, "human duration" as used in code
+          timeout: { minutes: 3 }
       masterBranches:
         organization: 'openedx'
         filters:
           branch: 'master'
+        schedule: # same options as in TaskScheduleDefinition
+          # supports cron, ISO duration, "human duration" as used in code
+          frequency: { minutes: 120 }
+          # supports ISO duration, "human duration" as used in code
+          timeout: { minutes: 3 }
       extraCatalogs:
         organization: 'openedx'
         catalogPath: 'catalog-extra/**/catalog-info.yaml'
         filters:
           branch: 'main'
           repository: 'openedx-backstage'
-
-
+        schedule: # same options as in TaskScheduleDefinition
+          # supports cron, ISO duration, "human duration" as used in code
+          frequency: { minutes: 120 }
+          # supports ISO duration, "human duration" as used in code
+          timeout: { minutes: 3 }
+    githubOrg:
+      id: ghUsers
+      githubUrl: https://github.com
+      orgs:
+        - openedx
+      schedule:
+        initialDelay: { seconds: 30 }
+        frequency: { hours: 1 }
+        timeout: { minutes: 50 }

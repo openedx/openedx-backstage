@@ -13,14 +13,18 @@ import {
 import { ScaffolderPage, scaffolderPlugin } from '@backstage/plugin-scaffolder';
 import { orgPlugin } from '@backstage/plugin-org';
 import { SearchPage } from '@backstage/plugin-search';
-import { TechRadarPage } from '@backstage/plugin-tech-radar';
+import { TechRadarPage } from '@backstage-community/plugin-tech-radar';
 import { UserSettingsPage } from '@backstage/plugin-user-settings';
 import { apis } from './apis';
 import { entityPage } from './components/catalog/EntityPage';
 import { searchPage } from './components/search/SearchPage';
 import { Root } from './components/Root';
 
-import { AlertDisplay, OAuthRequestDialog } from '@backstage/core-components';
+import {
+  AlertDisplay,
+  OAuthRequestDialog,
+  SignInPage,
+} from '@backstage/core-components';
 import { createApp } from '@backstage/app-defaults';
 import { AppRouter, FlatRoutes } from '@backstage/core-app-api';
 import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
@@ -29,12 +33,12 @@ import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/
 
 // Start Changes for GitHub Auth
 import { githubAuthApiRef } from '@backstage/core-plugin-api';
-import { SignInProviderConfig, SignInPage } from '@backstage/core-components';
+import { SignInProviderConfig } from '@backstage/core-components';
 
 const githubProvider: SignInProviderConfig = {
   id: 'github-auth-provider',
   title: 'GitHub',
-  message: 'Sign in using GitHub',
+  message: 'You must be a member of the "openedx" github org.',
   apiRef: githubAuthApiRef,
 };
 // End changes for GitHub Auth
@@ -42,7 +46,7 @@ const app = createApp({
   apis,
   components: {
     SignInPage: props => (
-      <SignInPage {...props} auto provider={githubProvider} />
+      <SignInPage {...props} auto providers={[githubProvider]} />
     ),
   },
   bindRoutes({ bind }) {
