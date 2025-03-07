@@ -25,6 +25,7 @@ To start the app, run:
 
 2. Start up the dev server
     ```sh
+    corepack enable
     yarn install
     yarn dev
     ```
@@ -45,7 +46,7 @@ This assumes you have the heroku CLI installed and have sucessfully
 authenticated.
 
 ```sh
-yarn install
+yarn install --immutable
 yarn tsc
 yarn build:backend
 docker image build . -f packages/backend/Dockerfile --tag registry.heroku.com/openedx-backstage/web --pull
