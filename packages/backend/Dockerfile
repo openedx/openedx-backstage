@@ -29,6 +29,9 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt-get install -y --no-install-recommends libsqlite3-dev && \
     rm -rf /var/lib/apt/lists/*
 
+# Enable corepack
+RUN corepack enable
+
 # From here on we use the least-privileged `node` user to run the backend.
 USER node
 
@@ -55,6 +58,7 @@ COPY --chown=node:node yarn.lock package.json packages/backend/dist/skeleton.tar
 RUN tar xzf skeleton.tar.gz && rm skeleton.tar.gz
 
 RUN --mount=type=cache,target=/home/node/.cache/yarn,sharing=locked,uid=1000,gid=1000 \
+    --mount=type=cache,target=/home/node/.cache/node/corepack/v1,sharing=locked,uid=1000,gid=1000 \
     yarn workspaces focus --all --production && rm -rf "$(yarn cache clean)"
 
 # This will include the examples, if you don't need these simply remove this line
