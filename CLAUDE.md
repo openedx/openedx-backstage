@@ -14,17 +14,17 @@ corepack enable
 yarn install
 ```
 
-Requires Node 20 or 22 (see `.nvmrc`), and the following environment variables for GitHub auth:
-- `AUTH_GITHUB_CLIENT_APP_ID`
+Requires Node 22 or 24 (see `.nvmrc`), and the following environment variables for GitHub auth:
+- `AUTH_GITHUB_APP_ID`
 - `AUTH_GITHUB_CLIENT_ID`
 - `AUTH_GITHUB_CLIENT_SECRET`
-- `AUTH_GITHUB_CLIENT_PRIVATE_KEY`
+- `AUTH_GITHUB_PRIVATE_KEY`
 
 ### Daily Development
 ```bash
-yarn dev          # Start both frontend (port 3000) and backend (port 7007) together
-yarn start        # Frontend only
-yarn start-backend  # Backend only
+yarn start              # Start both frontend (port 3000) and backend (port 7007) together
+yarn start app          # Frontend only
+yarn start backend      # Backend only
 ```
 
 ### Building
@@ -54,12 +54,14 @@ yarn prettier:check  # Check formatting
 - **`examples/`** — Sample entities and scaffolder templates
 
 ### Frontend (`packages/app`)
-Standard Backstage React app with these plugins enabled:
-- Catalog, Scaffolder, TechDocs, API Docs, Tech Radar, Search, Catalog Graph
-- GitHub Actions (community plugin)
-- GitHub authentication with openedx org requirement
+Uses the **declarative frontend** architecture (`@backstage/frontend-defaults`). Plugins are auto-discovered via `app.packages: all` in `app-config.yaml` — no manual wiring needed for standard plugins.
 
-Key files: `src/App.tsx` (routes and plugin bindings), `src/components/catalog/EntityPage.tsx` (entity display), `src/apis.ts`.
+Key files:
+- `src/App.tsx` — 7-line entry point: `createApp({ features: [catalogPlugin, navModule] })`
+- `src/modules/nav/` — custom sidebar (`NavContentBlueprint`) and GitHub sign-in page (`SignInPageBlueprint`)
+- `src/index.tsx` — renders via `App.createRoot()`
+
+Plugins enabled: Catalog (set as root `/`), Scaffolder, TechDocs, API Docs, Tech Radar, Search, Catalog Graph, GitHub Actions, Notifications, Signals.
 
 ### Backend (`packages/backend`)
 Single entry point at `src/index.ts` that registers all backend plugins:
