@@ -27,7 +27,7 @@ To start the app, run:
     ```sh
     corepack enable
     yarn install
-    yarn dev
+    yarn start
     ```
 
 # Deploying to Heroku
