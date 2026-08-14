@@ -34,3 +34,18 @@ backend:
       # ssl:
       #   ca: # if you have a CA file and want to verify it you can uncomment this section
       #     $file: <file-path>/ca/server.crt
+# We do want anonymous visitors browsing the catalog, but not like this. The
+# backend still registers the allow-all permission policy, so enabling guest on
+# its own would also grant anonymous writes. It has to land together with a
+# policy limiting guests to `read`, plus `dangerouslyAllowOutsideDevelopment`,
+# which the provider requires outside development. Tracked separately.
+# auth:
+#   providers:
+#     guest: {}
+
+# The template uses this to override the demo entities its app-config.yaml
+# seeds. We never seed them, so there is nothing to override.
+# catalog:
+#   locations:
+#     - type: file
+#       target: ./examples/entities.yaml

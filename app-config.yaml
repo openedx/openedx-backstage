@@ -54,6 +54,13 @@ backend:
 
 integrations:
   github:
+    # We use a GitHub App rather than the template's personal access token: it
+    # is not tied to one person's account and has the higher rate limit that
+    # org wide discovery needs.
+    ### Example for how to add a GitHub Enterprise instance using the API:
+    # - host: ghe.example.net
+    #   apiBaseUrl: https://ghe.example.net/api/v3
+    #   token: ${GHE_TOKEN}
     - host: github.com
       # Backstage docs for how to generate these: https://backstage.io/docs/integrations/github/github-apps
       # We also have more specific docs in `docs/source/how-tos/create-github-credentials.rst`
@@ -119,6 +126,23 @@ scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
 
 catalog:
+  # Left unset; these are already the defaults.
+  # import:
+  #   entityFilename: catalog-info.yaml
+  #   pullRequestBranchName: backstage-integration
+
+  # Left unset, so all kinds are allowed. Entities come from the providers
+  # below, not a hand written list, so there is nothing to constrain.
+  # rules:
+  #   - allow: [Component, System, API, Resource, Location]
+
+  # The template seeds demo entities from examples/. We do not. Everything comes
+  # from the GitHub providers below, including catalog-extra/, which the
+  # `extraCatalogs` provider picks up.
+  # locations:
+  #   - type: file
+  #     target: ../../examples/entities.yaml
+
   # Docs here:https://backstage.io/docs/integrations/github/discovery
   # Requires
   # yarn add --cwd packages/backend @backstage/plugin-catalog-backend-module-github
@@ -162,6 +186,11 @@ catalog:
         initialDelay: { seconds: 30 }
         frequency: { hours: 1 }
         timeout: { minutes: 50 }
+
+# Unused: nothing here runs on a cluster, so the kubernetes plugins are not
+# installed and this config alone would do nothing.
+# see https://backstage.io/docs/features/kubernetes/configuration for kubernetes configuration options
+# kubernetes:
 
 # see https://backstage.io/docs/permissions/getting-started for more on the permission framework
 permission:
