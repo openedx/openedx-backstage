@@ -42,10 +42,25 @@ backend:
     # config options: https://node-postgres.com/api/client
     client: better-sqlite3
     connection: ':memory:'
+  # Plugins whose actions are exposed as MCP tools. `scaffolder` is left out so
+  # agents cannot run software templates. The read-only filter under `mcpActions`
+  # is what stops anything here from writing.
+  # see https://backstage.io/docs/ai/mcp-actions#actions-configuration for more details
+  actions:
+    pluginSources:
+      - auth
+      - catalog
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
 integrations:
   github:
+    # We use a GitHub App rather than the template's personal access token: it
+    # is not tied to one person's account and has the higher rate limit that
+    # org wide discovery needs.
+    ### Example for how to add a GitHub Enterprise instance using the API:
+    # - host: ghe.example.net
+    #   apiBaseUrl: https://ghe.example.net/api/v3
+    #   token: ${GHE_TOKEN}
     - host: github.com
       # Backstage docs for how to generate these: https://backstage.io/docs/integrations/github/github-apps
       # We also have more specific docs in `docs/source/how-tos/create-github-credentials.rst`
@@ -93,11 +108,41 @@ auth:
     # See https://backstage.io/docs/auth/guest/provider
     # guest: {}
     guest: null
+  # Lets MCP clients register themselves and get a token through an approval
+  # popup, instead of everyone sharing one static MCP_TOKEN.
+  # see https://backstage.io/docs/ai/mcp-actions#client-id-metadata-documents
+  clientIdMetadataDocuments:
+    enabled: true
+    # Both patterns default to ['*']: any client, any redirect URI. Narrow them
+    # to limit who can ask users for a token.
+    # allowedClientIdPatterns:
+    #   - 'https://example.com/*'
+    #   - 'https://*.trusted-domain.com/*'
+    # allowedRedirectUriPatterns:
+    #   - 'http://localhost:*'
+    #   - 'https://*.example.com/*'
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
 
 catalog:
+  # Left unset; these are already the defaults.
+  # import:
+  #   entityFilename: catalog-info.yaml
+  #   pullRequestBranchName: backstage-integration
+
+  # Left unset, so all kinds are allowed. Entities come from the providers
+  # below, not a hand written list, so there is nothing to constrain.
+  # rules:
+  #   - allow: [Component, System, API, Resource, Location]
+
+  # The template seeds demo entities from examples/. We do not. Everything comes
+  # from the GitHub providers below, including catalog-extra/, which the
+  # `extraCatalogs` provider picks up.
+  # locations:
+  #   - type: file
+  #     target: ../../examples/entities.yaml
+
   # Docs here:https://backstage.io/docs/integrations/github/discovery
   # Requires
   # yarn add --cwd packages/backend @backstage/plugin-catalog-backend-module-github
@@ -142,7 +187,28 @@ catalog:
         frequency: { hours: 1 }
         timeout: { minutes: 50 }
 
+# Unused: nothing here runs on a cluster, so the kubernetes plugins are not
+# installed and this config alone would do nothing.
+# see https://backstage.io/docs/features/kubernetes/configuration for kubernetes configuration options
+# kubernetes:
+
 # see https://backstage.io/docs/permissions/getting-started for more on the permission framework
 permission:
   # setting this to `false` will disable permissions
   enabled: true
+
+# Served on /api/mcp-actions/v1/readonly.
+#
+# The catalog source also ships `register-entity` and `unregister-entity`, so we
+# filter on each action's own `readOnly` flag rather than listing names. Write
+# actions added upstream later stay hidden by default.
+# see https://backstage.io/docs/ai/mcp-actions for more details
+mcpActions:
+  servers:
+    readonly:
+      name: 'Open edX Backstage'
+      description: 'Read-only tools for exploring the Open edX software catalog.'
+      filter:
+        include:
+          - attributes:
+              readOnly: true

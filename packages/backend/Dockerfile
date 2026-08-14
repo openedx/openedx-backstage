@@ -43,8 +43,10 @@ USER node
 # If this occurs, then ensure BuildKit is enabled (`DOCKER_BUILDKIT=1`) so the app dir is correctly created as `node`.
 WORKDIR /app
 
-# Copy files needed by Yarn
-COPY --chown=node:node .yarn ./.yarn
+# Copy files needed by Yarn.
+# Upstream also copies `.yarn`, where it keeps its bundled Yarn release. We get
+# Yarn from corepack instead, so nothing there is tracked and copying it would
+# break on a fresh checkout.
 COPY --chown=node:node .yarnrc.yml ./
 COPY --chown=node:node backstage.json ./
 
