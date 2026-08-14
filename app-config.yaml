@@ -42,6 +42,14 @@ backend:
     # config options: https://node-postgres.com/api/client
     client: better-sqlite3
     connection: ':memory:'
+  # Plugins whose actions are exposed as MCP tools. `scaffolder` is left out so
+  # agents cannot run software templates. The read-only filter under `mcpActions`
+  # is what stops anything here from writing.
+  # see https://backstage.io/docs/ai/mcp-actions#actions-configuration for more details
+  actions:
+    pluginSources:
+      - auth
+      - catalog
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
 integrations:
@@ -93,6 +101,19 @@ auth:
     # See https://backstage.io/docs/auth/guest/provider
     # guest: {}
     guest: null
+  # Lets MCP clients register themselves and get a token through an approval
+  # popup, instead of everyone sharing one static MCP_TOKEN.
+  # see https://backstage.io/docs/ai/mcp-actions#client-id-metadata-documents
+  clientIdMetadataDocuments:
+    enabled: true
+    # Both patterns default to ['*']: any client, any redirect URI. Narrow them
+    # to limit who can ask users for a token.
+    # allowedClientIdPatterns:
+    #   - 'https://example.com/*'
+    #   - 'https://*.trusted-domain.com/*'
+    # allowedRedirectUriPatterns:
+    #   - 'http://localhost:*'
+    #   - 'https://*.example.com/*'
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
@@ -146,3 +167,19 @@ catalog:
 permission:
   # setting this to `false` will disable permissions
   enabled: true
+
+# Served on /api/mcp-actions/v1/readonly.
+#
+# The catalog source also ships `register-entity` and `unregister-entity`, so we
+# filter on each action's own `readOnly` flag rather than listing names. Write
+# actions added upstream later stay hidden by default.
+# see https://backstage.io/docs/ai/mcp-actions for more details
+mcpActions:
+  servers:
+    readonly:
+      name: 'Open edX Backstage'
+      description: 'Read-only tools for exploring the Open edX software catalog.'
+      filter:
+        include:
+          - attributes:
+              readOnly: true

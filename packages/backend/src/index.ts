@@ -68,4 +68,9 @@ backend.add(import('@backstage/plugin-user-settings-backend'));
 backend.add(import('@backstage/plugin-notifications-backend'));
 backend.add(import('@backstage/plugin-signals-backend'));
 
+// mcp actions plugin
+// Serves the actions from `backend.actions.pluginSources` as MCP tools.
+// See https://backstage.io/docs/ai/mcp-actions
+backend.add(import('@backstage/plugin-mcp-actions-backend'));
+
 backend.start();

@@ -25,6 +25,7 @@
     "@backstage/plugin-api-docs": "^0.14.3",
     "@backstage/plugin-app-react": "^0.2.5",
     "@backstage/plugin-app-visualizer": "^0.2.6",
+    "@backstage/plugin-auth": "^0.1.10",
     "@backstage/plugin-catalog": "^2.0.7",
     "@backstage/plugin-catalog-graph": "^0.6.6",
     "@backstage/plugin-catalog-import": "^0.13.15",
