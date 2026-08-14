@@ -59,6 +59,11 @@ backend.add(import('@backstage/plugin-search-backend-module-pg'));
 backend.add(import('@backstage/plugin-search-backend-module-catalog'));
 backend.add(import('@backstage/plugin-search-backend-module-techdocs'));
 
+// user settings plugin
+// Stores theme, starred entities and sidebar state per user. Only takes effect
+// with the @backstage/plugin-app-module-user-settings frontend module.
+backend.add(import('@backstage/plugin-user-settings-backend'));
+
 // notifications and signals plugins
 backend.add(import('@backstage/plugin-notifications-backend'));
 backend.add(import('@backstage/plugin-signals-backend'));

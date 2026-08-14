@@ -46,6 +46,7 @@
     "@backstage/plugin-search-backend-node": "^1.4.6",
     "@backstage/plugin-signals-backend": "^0.3.17",
     "@backstage/plugin-techdocs-backend": "^2.2.2",
+    "@backstage/plugin-user-settings-backend": "^0.4.5",
     "app": "link:../app",
     "node-gyp": "^10.0.0",
     "pg": "^8.11.3"
